@@ -3,9 +3,9 @@
     <div id="form">
       <h1>Tweeter</h1>
       <p>Email</p>
-      <input placeholder="Username, Email" type="text" id="email-input" v-model="email" />
+      <input type="text" id="email-input" v-model="email" />
       <p>Password</p>
-      <input placeholder="Password" type="password" id="password-input" v-model="password" />
+      <input  type="password" id="password-input" v-model="password" />
       <br />
       <button class="button" @click="loginUser">Log In</button>
       <p>OR</p>
@@ -46,7 +46,7 @@ export default {
           }
         })
         .then(response => {
-          window.location.href = "http://localhost:8080/#/tweets";
+          this.$router.push('/feedvue');
           this.loginStatus = "Success";
           cookies.set("session", response.data.loginToken);
         })
@@ -113,9 +113,16 @@ h1 {
 }
 #email-input {
   padding: 9px 0 3px 40px;
+  
 }
 #password-input {
   padding: 9px 0 3px 40px;
+  
+}
+:-ms-input-placeholder {  
+   text-align: center; 
+   position: absolute;
+  
 }
 
 </style>

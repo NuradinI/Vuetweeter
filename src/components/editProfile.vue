@@ -1,43 +1,44 @@
 <template>
-  <div>
-    <h1>Edit User</h1>
-    <p>Email</p>
-    <input type="text" id="email-input" v-model="email" />
-    <p>Username</p>
-    <input type="text" id="username-input" v-model="username" />
-    <p>Password</p>
-    <input type="password" id="password-input" v-model="password" />
-    <p>Bio</p>
-    <textarea id="bio-input" v-model="bio"></textarea>
-    <p>Birthday</p>
-    <input type="text" id="birthdate-input" v-model="birthdate" />
+  <div id="site">
+    <div id="content">
+      <h1 id="edit-profile">Edit Profile</h1>
+    <p>Email <input type="email" ></p>
+    
+    <p>Username <input type="text" ></p>
+    
+    <p>Password <input type="password" ></p>
+    
+    <p>Bio <textarea id="bio-input" v-model="bio"></textarea></p>
+
+    <p>Birthdate <input type="text" ></p>
+    
     <br />
-    <button @click="editProfile">Done</button>
-    <h1>Your Tweets</h1>
-    <delete-user></delete-user>
+  
+    </div>
+      <button @click="editProfile">Done</button>
+    <p>{{ bioStatus }}</p>
   </div>
 </template>
 
 <script>
-import DeleteUser from '../components/DeleteUser'
 import axios from "axios";
 import cookies from "vue-cookies";
 export default {
   name: "editProfile",
-  components: {
-    DeleteUser
-  },
+
   data() {
     return {
-      email: "",
-      username: "",
-      password: "",
       bio: "",
-      birthdate: ""
+      bioStatus: "",
+      email: '',
+      username: '',
+      password: '',
+      birthdate: ''
     };
   },
   methods: {
     editProfile: function() {
+      this.loginStatus = "Loading...";
       axios
         .request({
           url: "https://tweeterest.ml/api/users",
@@ -47,18 +48,21 @@ export default {
             "X-Api-Key": "cV12Yhk7l53GbDYEz21x8SO6fFPxc8Tlcpy1BWglKmNKB"
           },
           data: {
+            bio: this.bio,
+            bioStatus: this.bioStatus,
+            loginToken: cookies.get("session"),
             email: this.email,
             username: this.username,
             password: this.password,
-            bio: this.bio,
             birthdate: this.birthdate
           }
         })
         .then(response => {
+          this.bioStatus = "Bio Edited!";
           console.log("Changed"), console.log(response);
-          cookies.set("session", response.data.loginToken);
         })
         .catch(error => {
+          this.bioStatus = "Oops! Something went wrong...";
           console.log(error);
           console.log("Something failed");
         });
@@ -68,7 +72,10 @@ export default {
 </script>
 
 <style scoped>
-div {
-  text-align: center;
+#edit-profile {
+text-align: center;
+}
+content {
+  display: grid;
 }
 </style>

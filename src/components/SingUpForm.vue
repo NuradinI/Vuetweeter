@@ -15,6 +15,7 @@
       <br />
       <button class="button" @click="signUpUser">SignUp</button>
       <br />
+      <h3>{{ loginStatus }}</h3>
       <router-link to="/">Login</router-link>
     </div>
   </div>
@@ -33,11 +34,13 @@ export default {
       username: "",
       password: "",
       bio: "",
-      birthdate: ""
+      birthdate: "",
+      loginStatus: ''
     };
   },
   methods: {
     signUpUser: function() {
+      this.loginStatus = 'Loading..'
       axios
         .request({
           method: "POST",
@@ -51,15 +54,19 @@ export default {
             username: this.username,
             password: this.password,
             bio: this.bio,
-            birthdate: this.birthdate
+            birthdate: this.birthdate,
+            
           }
         })
         .then(response => {
-          console.log("Success!");
+          this.loginStatus = "Account Created";
+          this.$router.push('/feedvue')
           console.log(response);
           cookies.set("session", response.data.loginToken);
+
         })
         .catch(error => {
+          this.loginStatus = "Oops! Something went wrong.."
           console.log(error);
           console.log("something failed");
         });
@@ -69,55 +76,5 @@ export default {
 </script>
 
 <style scoped>
-#form {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  height: 40vh;
-  text-align: center;
-}
-#site {
-  display: grid;
-  padding-left: 5vw;
-  padding-right: 5vw;
-}
-.button {
-  background-color: #0095f6;
-  border-radius: 5px;
-  border: 1px solid #124d77;
-  display: inline-block;
-  cursor: pointer;
-  color: #ffffff;
-  font-family: Arial;
-  font-size: 18px;
-  font-weight: 520;
-  padding: 5px 85px;
-  text-decoration: none;
-  margin-left: 3vw;
-  margin-right: 3vw;
-}
-.button:hover {
-  background-color: #0061a7;
-}
-.button:active {
-  position: relative;
-  top: 1px;
-}
 
-#signup {
-  color: #0095f6;
-  text-decoration: none;
-}
-h4 {
-  margin-top: 1.2vh;
-  color: #8e8e8e;
-}
-h1 {
-  font-family: "Lobster Two", cursive;
-  font-size: 2.5em;
-}
-h5 {
-  color: #8e8e8e;
-}
 </style>

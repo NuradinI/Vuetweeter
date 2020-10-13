@@ -1,12 +1,6 @@
 <template>
-  <div id="site">
-    <h3>Post a Tweet!</h3>
-    <textarea v-model="tweet"></textarea>
-    <br />
-    <button @click="postTweet">Submit</button>
-    <p id="status"></p>
-    <h3 class="tweets"></h3>
-   
+  <div>
+    <i @click="deleteTweet" class="fas fa-trash-alt"></i>
   </div>
 </template>
 
@@ -14,34 +8,33 @@
 import axios from "axios";
 import cookies from "vue-cookies";
 export default {
-  data() {
-    return {
-      tweet: ""
-    };
+  props: {
+    tweetObject: {
+      type: Object
+    }
   },
   methods: {
-    postTweet() {
+    deleteTweet() {
+      //no data returned because im deleting it
       axios
         .request({
           url: "https://tweeterest.ml/api/tweets",
-          method: "POST",
+          method: "DELETE",
           headers: {
             "Content-Type": "application/json",
             "X-Api-Key": "cV12Yhk7l53GbDYEz21x8SO6fFPxc8Tlcpy1BWglKmNKB"
           },
           data: {
             loginToken: cookies.get("session"),
-            content: this.tweet
+           
+            tweetId: this.tweetObject.tweetId
           }
         })
         .then(response => {
           console.log(response);
-          document.getElementsByClassName('tweets').innerHTML = this.tweet
         })
         .catch(error => {
           console.log(error);
-          document.getElementById("status").innerHTML =
-            "Oops! Something went wrong";
         });
     }
   }
@@ -49,8 +42,4 @@ export default {
 </script>
 
 <style scoped>
-#site {
-  text-align: center;
-  background-color: rgb(21, 32, 43);
-}
 </style>
