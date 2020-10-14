@@ -1,12 +1,17 @@
 <template>
   <div id="site">
-    <h3>Post a Tweet!</h3>
-    <textarea v-model="tweet"></textarea>
-    <br />
-    <button @click="postTweet">Submit</button>
-    <p id="status"></p>
-    <h3 class="tweets"></h3>
-   
+     <link
+      href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@100&display=swap"
+      rel="stylesheet"
+    />
+    <div id="tweet">
+      <h3 id="post">Post a Tweet!</h3>
+      <textarea v-model="tweet"></textarea>
+      <br />
+      <button @click="postTweet">Submit</button>
+      <p id="status"></p>
+      <h3 class="tweets"></h3>
+    </div>
   </div>
 </template>
 
@@ -36,7 +41,7 @@ export default {
         })
         .then(response => {
           console.log(response);
-          document.getElementsByClassName('tweets').innerHTML = this.tweet
+          document.getElementsByClassName("tweets").innerHTML = this.tweet;
         })
         .catch(error => {
           console.log(error);
@@ -52,5 +57,12 @@ export default {
 #site {
   text-align: center;
   background-color: rgb(21, 32, 43);
+}
+h3 {
+  padding-top: 4vh;
+}
+#post {
+color: #f1e9e3;
+  font-family: "Piazzolla", serif;
 }
 </style>

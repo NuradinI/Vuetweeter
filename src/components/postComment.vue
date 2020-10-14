@@ -1,6 +1,6 @@
 <template>
   <div>
-    <i class="fas fa-comments"></i>
+    <i @click="isShow=!isShow" class="far fa-comment"></i>
     <div v-if="isShow"> 
 <textarea v-model="comment"></textarea>
     <button @click="postComment" >Post Comment!</button>

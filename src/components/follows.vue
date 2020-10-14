@@ -1,41 +1,49 @@
 <template>
   <div>
-    <i @click="deleteTweet" class="far fa-trash-alt"></i>
+    <div v-for="user in users" :key="user.userId">
+      <follows-card :usersObject="user"  />
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import cookies from "vue-cookies";
+import FollowsCard from "../components/followsCard.vue";
 export default {
   props: {
-    tweetObject: {
+    usersObject: {
       type: Object
     }
   },
+  components: {
+    FollowsCard
+  },
+  data() {
+    return {
+      follows: []
+    };
+  },
   methods: {
-    deleteTweet() {
-      //no data returned because im deleting it
+    getUsers: function() {
       axios
         .request({
-          url: "https://tweeterest.ml/api/tweets",
-          method: "DELETE",
+          url: "https://tweeterest.ml/api/users",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
             "X-Api-Key": "cV12Yhk7l53GbDYEz21x8SO6fFPxc8Tlcpy1BWglKmNKB"
-          },
-          data: {
-            loginToken: cookies.get("session"),
-            tweetId: this.tweetObject.tweetId
           }
         })
         .then(response => {
-          console.log(response);
+          this.follows = response.data;
         })
         .catch(error => {
           console.log(error);
         });
     }
+  },
+  mounted() {
+    this.getUsers();
   }
 };
 </script>

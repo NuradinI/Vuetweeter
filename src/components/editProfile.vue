@@ -72,10 +72,5 @@ export default {
 </script>
 
 <style scoped>
-#edit-profile {
-text-align: center;
-}
-content {
-  display: grid;
-}
+
 </style>

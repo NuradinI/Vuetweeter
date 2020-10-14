@@ -1,12 +1,15 @@
 <template>
-  <div>
+  <div id="content">
     <page-header></page-header>
-    <a href="#" @click="goBack">Go back</a>
+      <link
+      href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@100&display=swap"
+      rel="stylesheet"
+    />
     <br />
-    <p>Password</p>
-    <input v-model="password" placeholder="Insert Password" type="password" />
+    <p class="delete">Password</p>
+    <input class="delete" v-model="password" placeholder="Insert Password" type="password" />
     <br />
-    <button @click="deleteUser">Delete Account</button>
+    <button class="delete" @click="deleteUser"> Delete Account! </button>
     <h3>{{loginStatus}}</h3>
   </div>
 </template>
@@ -61,6 +64,12 @@ export default {
 
 <style scoped>
 div {
-  text-align: center;
+ position: absolute;
+ top: 50px;  
+}
+.delete {
+  margin: 5px 0px;
+    font-family: "Piazzolla", serif;
+
 }
 </style>

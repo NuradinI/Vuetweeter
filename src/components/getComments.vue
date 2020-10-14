@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-for="tweet in tweets" :key="tweet.tweetId">
-      <comment-card :tweetObject="tweet"/>
+    <div v-for="comment in comments" :key="comment.commentId">
+      <comment-card :commentObject="comment"/>
     </div>
   </div>
 </template>
@@ -44,7 +44,10 @@ export default {
       })
     },
   
-  }
+  },
+  mounted () {
+    this.getComments();
+  },
 };
 </script>
 

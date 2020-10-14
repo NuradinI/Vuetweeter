@@ -1,9 +1,9 @@
 <template>
   <div>
-   <i @click="isShow=!isShow" class="fas fa-edit"></i>
+   <i @click="isShow=!isShow" class="far fa-edit"></i>
     <div v-if="isShow"> 
       <textarea v-model="tweet"></textarea>
-      <button @click="editTweet">Post!</button>
+      <button @click="editTweet">Edit Tweet!</button>
     </div>
 
 

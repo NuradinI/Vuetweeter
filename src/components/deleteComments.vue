@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="deleteComment">Delete Comment!</button>
+    <i @click="deleteComment" class="far fa-trash-alt"></i>
   </div>
 </template>
 
@@ -9,7 +9,7 @@ import axios from "axios";
 import cookies from "vue-cookies";
 export default {
   props: {
-    tweetId: {
+    commentObject: {
       type: Object
     }
   },
@@ -24,7 +24,7 @@ export default {
         },
         data: {
             loginToken: cookies.get('session'),
-            commentId: this.commentId
+            commentId: this.commentObject.commentId
         }
       }).then((response) => {
           console.log(response)
