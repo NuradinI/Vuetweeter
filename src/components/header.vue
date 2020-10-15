@@ -4,9 +4,7 @@
       <li>
         <router-link to="/feedvue">Feed</router-link>
       </li>
-      <li>
-        <router-link to="/explorer">Explore</router-link>
-      </li>
+      
       <li>
         <router-link to="/follows">Follows</router-link>
       </li>

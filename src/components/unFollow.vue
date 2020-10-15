@@ -1,25 +1,25 @@
 <template>
   <div>
-<button @click="followUser">Follow User!</button>
+    <button @click="UnfollowUser">UnFollow User!</button>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 import cookies from 'vue-cookies'
-  export default {
-    props: {
-      followId: {
-        type: Number,
-        required: true
-      }
-    },
-    methods: {
-    followUser: function() {
+export default {
+  props: {
+    followId: {
+      type: Number,
+      required: true
+    }
+  },
+  methods: {
+    UnfollowUser: function() {
       axios
         .request({
           url: "https://tweeterest.ml/api/follows",
-          method: "POST",
+          method: "DELETE",
           headers: {
             "Content-Type": "application/json",
             "X-Api-Key": "cV12Yhk7l53GbDYEz21x8SO6fFPxc8Tlcpy1BWglKmNKB"
@@ -36,12 +36,9 @@ import cookies from 'vue-cookies'
           console.log(error);
         });
     }
-  },
- 
   }
-  
+};
 </script>
 
 <style scoped>
-
 </style>

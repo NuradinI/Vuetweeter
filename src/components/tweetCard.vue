@@ -13,7 +13,7 @@
       <delete-tweet class="icon" :tweetObject="tweetObject" />
       <edit-tweet class="icon" :tweetObject="tweetObject" />
       <post-comment class="icon" :tweetId="tweetObject.tweetId" />
-      <like-button class="icon"/>
+      <like-tweet class="icon" :tweetId="tweetObject.tweetId" />
     </div>
     <get-comments :tweetId="tweetObject.tweetId"/>
   </div>
@@ -21,7 +21,7 @@
 
 <script>
 import GetComments from '../components/getComments.vue'
-import LikeButton from '../components/likes.vue';
+import LikeTweet from '../components/tweetLikes.vue'
 import DeleteTweet from "../components/deleteTweet.vue";
 import EditTweet from "../components/editTweet.vue";
 import PostComment from "../components/postComment.vue";
@@ -30,7 +30,7 @@ export default {
     DeleteTweet,
     EditTweet,
     PostComment,
-    LikeButton,
+    LikeTweet,
     GetComments
   },
   props: {

@@ -13,10 +13,10 @@
     <p>Birthdate <input type="text" ></p>
     
     <br />
-  
-    </div>
-      <button @click="editProfile">Done</button>
+     <button  @click="editProfile">Edit</button>
     <p>{{ bioStatus }}</p>
+    </div>
+   
   </div>
 </template>
 
@@ -72,5 +72,25 @@ export default {
 </script>
 
 <style scoped>
+#site{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+@media  only screen and (min-width:700px) {
+  #site {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+}
+  @media  only screen and (min-width:1150) {
+  #site {
+    display: grid;
+    grid-template-columns:2fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+  }
+
+}
+
 
 </style>

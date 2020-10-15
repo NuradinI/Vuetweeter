@@ -1,24 +1,24 @@
 <template>
   <div>
-<button @click="followUser">Follow User!</button>
+    <i @click="likeTweet"  class="far fa-heart"></i>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 import cookies from 'vue-cookies'
-  export default {
-    props: {
-      followId: {
-        type: Number,
-        required: true
-      }
-    },
-    methods: {
-    followUser: function() {
+export default {
+  props: {
+    tweetObject: {
+      type: Object
+    }
+  },
+  
+  methods: {
+    likeTweet: function() {
       axios
         .request({
-          url: "https://tweeterest.ml/api/follows",
+          url: "https://tweeterest.ml/api/tweet-likes",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -26,7 +26,7 @@ import cookies from 'vue-cookies'
           },
           data: {
             loginToken: cookies.get("session"),
-            followId: this.followId
+            tweetId: this.tweetId,
           }
         })
         .then(response => {
@@ -36,12 +36,9 @@ import cookies from 'vue-cookies'
           console.log(error);
         });
     }
-  },
- 
   }
-  
+};
 </script>
 
 <style scoped>
-
 </style>

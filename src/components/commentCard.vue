@@ -10,10 +10,10 @@
       <p class="content">{{ commentObject.createdAt }}</p>
     </div>
     <div id="icons">
-      <get-comments class="icon" />
+      <get-comments class="icon" :commentObject="commentObject"  />
       <delete-comment class="icon" :commentObject="commentObject" />
       <edit-comment class="icon" :commentObject="commentObject"  />
-      <comment-likes class="icon" :commentObject="commentObject"  />
+      <like-comment class="icon" :commentObject="commmentObject"/>
     </div>
   </div>
 </template>
@@ -22,13 +22,14 @@
 import GetComments from "../components/getComments.vue";
 import EditComment from "../components/editComments.vue";
 import DeleteComment from "../components/deleteComments.vue";
-import CommentLikes from "../components/likes.vue";
+import LikeComment from '../components/likeComment.vue'
 export default {
   components: {
     GetComments,
     EditComment,
     DeleteComment,
-    CommentLikes
+    LikeComment
+    
   },
   props: {
     commentObject: {
